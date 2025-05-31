@@ -1,15 +1,11 @@
 import random
 
+from game.game_event import GameEvent
+
 TIC_TAC_TOE_DICT = {}
 X_MARK = 'X'
 O_MARK = 'O'
 EMPTY_MARK = ' '
-
-
-class GameEvent:
-    def __init__(self, message: str | None, board: str | None = None):
-        self.message = message
-        self.board = board
 
 
 def start(player_id: str, player_mark: str) -> GameEvent:

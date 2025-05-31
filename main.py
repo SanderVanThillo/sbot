@@ -5,9 +5,9 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from dog_fact import get_dog_fact
-from dog_photo import get_dog_photo
-from tic_tac_toe import start, play
+from dog.dog_fact import get_dog_fact
+from dog.dog_photo import get_dog_photo
+from game.tic_tac_toe import start, play
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -49,16 +49,16 @@ async def on_message(message):
 @bot.command()
 async def command_list(ctx):
     await ctx.send(
-    '''List of commands:
-    1) !ping -> Pings the bot
-    2) !hello -> Says hello
-    3) !assign -> Assigns the Member role
-    4) !unassign -> Removes the Member role
-    5) !secret -> Secret command for the Member role
-    6) !dog_fact -> Returns a random dog fact
-    7) !dog_photo -> Returns a random dog photo
-    8) !tic_tac_toe_start <X|O> -> Starts a new game of Tic Tac Toe. Select X or O as your marker.
-    9) !tic_tac_toe_play <row> <column> -> Places a mark at the specified row and column'''
+        '''List of commands:
+        1) !ping -> Pings the bot
+        2) !hello -> Says hello
+        3) !assign -> Assigns the Member role
+        4) !unassign -> Removes the Member role
+        5) !secret -> Secret command for the Member role
+        6) !dog_fact -> Returns a random dog fact
+        7) !dog_photo -> Returns a random dog photo
+        8) !tic_tac_toe_start <X|O> -> Starts a new game of Tic Tac Toe. Select X or O as your marker.
+        9) !tic_tac_toe_play <row> <column> -> Places a mark at the specified row and column'''
     )
 
 
@@ -120,9 +120,12 @@ async def tic_tac_toe_start(ctx, player_mark):
     if game_event.message: await ctx.send(game_event.message)
     if game_event.board: await ctx.send("```" + game_event.board + "```")
 
+
 @tic_tac_toe_start.error
 async def secret_error(ctx, _):
-    await ctx.send('Please add X or O to the command to specify your marker. Example: !tic_tac_toe_start X or !tic_tac_toe_start O.')
+    await ctx.send(
+        'Please add X or O to the command to specify your marker. Example: !tic_tac_toe_start X or !tic_tac_toe_start O.')
+
 
 @bot.command()
 async def tic_tac_toe_play(ctx, row, column):
@@ -130,8 +133,11 @@ async def tic_tac_toe_play(ctx, row, column):
     if game_event.message: await ctx.send(game_event.message)
     if game_event.board: await ctx.send("```" + game_event.board + "```")
 
+
 @tic_tac_toe_play.error
 async def secret_error(ctx, _):
-    await ctx.send('Please add your row and column numbers. Example: !tic_tac_toe_play 0 2. They can range from 0 to 2.')
+    await ctx.send(
+        'Please add your row and column numbers. Example: !tic_tac_toe_play 0 2. They can range from 0 to 2.')
+
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
