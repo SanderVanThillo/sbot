@@ -117,8 +117,8 @@ async def dog_photo(ctx):
 @bot.command()
 async def tic_tac_toe_start(ctx, player_mark):
     game_event = start(ctx.author.id, player_mark)
-    if game_event.message: await ctx.send(game_event.message)
-    if game_event.board: await ctx.send("```" + game_event.board + "```")
+    if game_event.message(): await ctx.send(game_event.message())
+    if game_event.board(): await ctx.send("```" + game_event.board() + "```")
 
 
 @tic_tac_toe_start.error
@@ -130,8 +130,8 @@ async def secret_error(ctx, _):
 @bot.command()
 async def tic_tac_toe_play(ctx, row, column):
     game_event = play(ctx.author.id, int(row), int(column))
-    if game_event.message: await ctx.send(game_event.message)
-    if game_event.board: await ctx.send("```" + game_event.board + "```")
+    if game_event.message(): await ctx.send(game_event.message())
+    if game_event.board(): await ctx.send("```" + game_event.board() + "```")
 
 
 @tic_tac_toe_play.error
