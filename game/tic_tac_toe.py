@@ -3,12 +3,12 @@ import random
 from game.game_event import GameEvent
 
 TIC_TAC_TOE_DICT = {}
-X_MARK = 'X'
-O_MARK = 'O'
-EMPTY_MARK = ' '
+X_MARK = "X"
+O_MARK = "O"
+EMPTY_MARK = " "
 
 
-def start(player_id: str, player_mark: str) -> GameEvent:
+def start_tic_tac_toe(player_id: str, player_mark: str) -> GameEvent:
     try:
         new_tic_tac_toe = TicTacToe(player_mark.upper())
         # if a game already exists for this player, it will be overwritten
@@ -16,12 +16,12 @@ def start(player_id: str, player_mark: str) -> GameEvent:
 
         if player_mark == O_MARK: new_tic_tac_toe.place_computer_mark()
 
-        return GameEvent('Tic Tac Toe has started! X goes first.', str(new_tic_tac_toe))
+        return GameEvent("Tic Tac Toe has started! X goes first.", str(new_tic_tac_toe))
     except InvalidMarkError as error:
         return GameEvent(error.message())
 
 
-def play(player_id: str, row: int, col: int) -> GameEvent:
+def play_tic_tac_toe(player_id: str, row: int, col: int) -> GameEvent:
     try:
         tic_tac_toe = TIC_TAC_TOE_DICT[player_id]
 
