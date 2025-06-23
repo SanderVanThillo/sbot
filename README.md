@@ -1,0 +1,2 @@
+# sbot
+Basic Discord bot
